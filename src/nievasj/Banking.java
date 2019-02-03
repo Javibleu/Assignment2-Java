@@ -1,3 +1,8 @@
+package nievasj;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 /* 
 Name:       Javier Nievas 
 Assignment: Assignment(******************)
@@ -5,15 +10,6 @@ Program:    PROG24178
 Date:       2-Feb-2019
  
 Description: [program description in your own words] 
- */
-package nievasj;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
-/**
- *
- * @author Javier Nievas
  */
 public class Banking {
 
@@ -24,7 +20,7 @@ public class Banking {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        // Instanciates the Accounts Objects
         ChequingAccount account101 = new ChequingAccount("101", 1000, "Carlos");
         SavingsAccount account201 = new SavingsAccount("201", 1000, "Carlos");
         InvestAccount account301 = new InvestAccount("301", 1000, "Carlos");
@@ -37,7 +33,6 @@ public class Banking {
         executeTransactions(account101, depositInput, depositWithdraw);
         executeTransactions(account201, depositInput, depositWithdraw);
         executeTransactions(account301, depositInput, depositWithdraw);
-
     }// main end
 
     /**
@@ -94,20 +89,21 @@ public class Banking {
     }// Ends PromptClient method
 
     /**
-      Method that executes transactions on Accounts
+     * Method that executes transactions on Accounts
+     *
      * @param account Object on with will be executed the transaction
      * @param depositInput Amount of money that will be deposited
      * @param withdrawInput Amount of money that will be withdraw
      */
     public static void executeTransactions(Account account,
             double depositInput, double withdrawInput) {
-        account.AccountDeposit(depositInput);
+        account.accountDeposit(depositInput);
         try {
-            account.AccountWithdraw(withdrawInput);
+            account.accountWithdraw(withdrawInput);
         } catch (IllegalArgumentException a) {
             System.out.println(a.getMessage());
         }
         System.out.println(account);
     }
 
-}
+}// class end
