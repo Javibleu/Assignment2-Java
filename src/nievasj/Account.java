@@ -111,8 +111,8 @@ public abstract class Account {
 
     /**
      * Calculates the balance (Balance + Amount Earned with interest)
-     *
-     *
+     * @param amount receives the amount deposited to calculate the final
+     * balance
      */
     public void calculateBalance(double amount) {
         accountBalance = accountBalance + annualEarnings() + amount;

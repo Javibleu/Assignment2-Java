@@ -43,7 +43,7 @@ public class Banking {
     public static void printHeaderTable(ChequingAccount a) {
         System.out.println("Customer: " + a.customerName);
         System.out.println("===========================================");
-        System.out.printf("%s %7s %9s %7s %9s\n", "AccNo.", "Deposit",
+        System.out.printf("%s %7s %10s %8s %8s\n", "AccNo.", "Deposit",
                 "Withdraw", "Intr.", "NewBal");
         System.out.println("===========================================");
     }
