@@ -17,6 +17,9 @@ import java.util.Scanner;
  */
 public class Banking {
 
+    static double depositInput;
+    static double withdrawInput;
+
     /**
      * @param args the command line arguments
      */
@@ -27,13 +30,15 @@ public class Banking {
         SavingsAccount account201 = new SavingsAccount("201", 1000, "Carlos");
         InvestmentAccount account301 = new InvestmentAccount("301", 1000, "Carlos");
 
-        enterDeposit(account101, account201, account301);
-        enterWithdraw(account101, account201, account301);
+        validDeposit();
+        validWithdraw();
 
         printTitle(account101);
-        System.out.println(account101);
-        System.out.println(account201);
-        System.out.println(account301);
+        
+        executeTransactions(account101);
+        executeTransactions(account201);
+        executeTransactions(account301);
+        
 
     }
 
@@ -44,12 +49,11 @@ public class Banking {
         System.out.println("===========================================");
     }
 
-    public static void enterDeposit(Account a, Account b ,Account c) {
-        double value = 0;
+    public static void validDeposit() {
         boolean cont;       //flag to keep into loop or get out of it
         do {
             try {
-                value = (promptClient("Enter amount you want to deposit:"));
+                depositInput = (promptClient("Enter amount you want to deposit:"));
                 cont = false;       //to go out of loop
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -61,50 +65,28 @@ public class Banking {
             }
 
         } while (cont);
-    
-            a.AccountDeposit(value);
-            b.AccountDeposit(value);
-            c.AccountDeposit(value);
-          
-        }
-        
 
-    
-        public static void enterWithdraw(Account a, Account b ,Account c) {
-        double value = 0;
-        boolean cont;       //flag to keep into loop or get out of it
-        do {
-            try {
-                value = (promptClient("Enter amount you want to withdraw: "));
-                cont = false;       //to go out of loop
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                cont = true;    //continue into the loop asking for correct data
-            } catch (InputMismatchException f) {
-                System.out.println("Error: The value entered is not a number");
-                cont = true;    //continue into the loop asking for correct data
-
-            }
-
-        } while (cont);
-        
-            try{ 
-             a.AccountWithdraw(value);
-             } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            }
-            try{ 
-             b.AccountWithdraw(value);
-             } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            }try{ 
-             c.AccountWithdraw(value);
-             } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            }
-         
     }
-    
+
+    public static void validWithdraw() {
+        boolean cont;       //flag to keep into loop or get out of it
+        do {
+            try {
+                withdrawInput = (promptClient("Enter amount you want to withdraw: "));
+                cont = false;       //to go out of loop
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                cont = true;    //continue into the loop asking for correct data
+            } catch (InputMismatchException f) {
+                System.out.println("Error: The value entered is not a number");
+                cont = true;    //continue into the loop asking for correct data
+
+            }
+
+        } while (cont);
+
+    }
+
     public static double promptClient(String prompt) {
         Scanner sc = new Scanner(System.in);
         System.out.println(prompt);
@@ -116,4 +98,15 @@ public class Banking {
                     + "number");
         }
     }
+
+    public static void executeTransactions(Account account) {
+        account.AccountDeposit(depositInput);
+        try {
+            account.AccountWithdraw(withdrawInput);
+        } catch (IllegalArgumentException a) {
+            System.out.println(a.getMessage());
+        }
+        System.out.println(account);
+    }
+
 }
